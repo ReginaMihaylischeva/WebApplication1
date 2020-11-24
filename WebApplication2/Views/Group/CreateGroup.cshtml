@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "CreateGroup";
+}
+
+<h3>Создать учебную группу</h3>
+<h6>Учебные группы>Создать учебную группу</h6>
+
+@model TestsTesk.Models.Requests.AddGroupRequest
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Group" asp-action="CreateGroup" method="post">
+    <p>
+        <label for="name">Преподаватель</label><br />
+        @Html.DropDownListFor(model => model.TeacherId, ViewBag.Teachers as SelectList)
+    </p>
+
+    <label for="name">Название</label><br />
+    @Html.EditorFor(model => model.Name)
+    <br />
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Создать учебную группу" class="btn btn-primary" />
+    </div>
+</form>

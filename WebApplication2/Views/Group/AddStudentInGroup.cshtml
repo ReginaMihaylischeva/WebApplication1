@@ -1,0 +1,51 @@
+﻿@model WebApplication2.Models.Requests.AddStudentInGroupRequest
+@{
+    ViewData["Title"] = "AddStudentInGroup";
+}
+
+<h3>Добавить студента в учебную группу</h3>
+<h6>Учебные группы>Добавить студента в учебную группу</h6>
+
+@using (Html.BeginForm())
+{
+    <form asp-controller="Group" asp-action="AddStudentInGroup" method="post">
+        <div>
+            <label for="name">Учебная группа</label><br />
+            <label for="name">@Model.groupName</label><br />
+            <label for="name">Преподаватель</label><br />
+            <label for="name">@Model.teacherName</label><br /><br />
+            @Html.DropDownListFor(
+              x => x.Organisations,
+              new SelectList(Model.Organisations, "OrganisationId", "Name"),
+              new
+              {
+                  id = "myddl",
+                  data_url = Url.Action("GetItems", "Group")
+              })
+            <br />
+            <br />
+            @Html.DropDownListFor(
+                x => x.Employees,
+                new SelectList(Model.Employees, "EmployeeId", "Name"),
+                new
+                {
+                    id = "result"
+                })
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Добавить студента в учебную группу" class="btn btn-primary" />
+        </div>
+    </form>
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#myddl').change(function () {
+            var url = $(this).data('url');
+            var value = $(this).val();
+            $('#result').load(url, { id: value })
+        });
+    });
+</script>

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<TestsTesk.Context.Employee>
+    @{
+        ViewData["Title"] = "GetItems";
+}
+
+
+<select id="result">
+    @foreach (var item in Model)
+    {
+
+        <option value="@item.EmployeeId">@item.Name</option>
+
+    }
+</select>
